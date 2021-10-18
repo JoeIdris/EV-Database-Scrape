@@ -22,17 +22,11 @@ def scrape_website():
     soup = visit_link(website)
 
     vehicle_dict = {}
-    for idx, vehicle in enumerate(soup.findAll('div', {'class': 'list-item'}), 1)
+    for idx, vehicle in enumerate(soup.findAll('div', {'class': 'list-item'}), 1):
         make, model = [x.text for x in vehicle.find('a', {'class': 'title'}).findAll('span', {'class': [re.compile(r'[a-z]+'), 'model']})]
         vehicle_name = make + ' ' + model
         battery = vehicle.find('span', {'class': 'battery'}).text
         acceleration, topspeed, range, efficiency, fastcharge = [x.findAll('span')[-1].text for x in vehicle.findAll('p', {'class': 'left'})]
-
-
-        vehicle_dict[vehicle_name] = vehicle_dict.get(vehicle_name, {})
-        keys = ['Battery', 'Acceleration', 'Top Speed', 'Range', 'Efficiency', 'Fast Charge']
-        for i in keys:
-            vehicle_dict[vehicle_name][i] =
 
         vehicle_dict[vehicle_name] = vehicle_dict.get(vehicle_name, {})
         vehicle_dict[vehicle_name]['Battery'] = battery
